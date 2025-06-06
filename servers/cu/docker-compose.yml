@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  cu-server:
+    image: aluisyo/omnisarns:latest
+    container_name: cu-server
+    ports:
+      - "6363:6363"
+    environment:
+      - WALLET=${WALLET} # Pass the JWK as an environment variable
+      - NODE_CONFIG_ENV=production
+      - GATEWAY_URL=https://arweave.net
+      - ARWEAVE_URL=https://arweave.net
+      - GRAPHQL_URL=https://arweave.net/graphql
+      - CHECKPOINT_GRAPHQL_URL=https://arweave.net/graphql
+      - UPLOADER_URL=https://up.arweave.net
+      - PORT=6363
+      - ENABLE_METRICS_ENDPOINT=true
+      - DB_MODE=embedded
+      - DB_URL=ao-cache
+      - PROCESS_WASM_MEMORY_MAX_LIMIT=1073741824
+      - PROCESS_WASM_COMPUTE_MAX_LIMIT=9000000000
+      - DEFAULT_LOG_LEVEL=debug
+      - LOG_CONFIG_PATH=/app/config/log-config.json
+    restart: always
